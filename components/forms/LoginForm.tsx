@@ -2,10 +2,12 @@
 
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
+import Link from "next/link";
 // import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
 import { authApi } from "@/services/auth";
 import { useAuthContext } from "@/contexts/AuthContext";
+import toast from "react-hot-toast";
 
 type LoginInputs = {
   email: string;
@@ -28,6 +30,7 @@ export default function LoginForm() {
       console.log("Login successful:", response);
       if (response.status === "success" && response.token) {
         saveAuthToken(response.token);
+        toast.success("Login successful")
       } else {
         throw new Error("Login failed");
       }
@@ -75,12 +78,12 @@ export default function LoginForm() {
         >
           دخول
         </button>
-        <button
-          type="button"
-          className="w-fit text-primary underline p-2 text-md rounded-md"
+        <Link
+          href="/signup"
+          className="w-fit text-primary underline p-2 text-md rounded-md hover:bg-opacity-25"
         >
-          نسيت كلمة المرور؟
-        </button>
+          إنشاء حساب جديد
+        </Link>
       </div>
     </form>
   );

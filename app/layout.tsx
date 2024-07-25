@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import { Toaster } from "react-hot-toast";
 import clsx from "clsx";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -30,6 +31,7 @@ export default function RootLayout({
       </head>
       <body className={clsx(inter.className, "w-full min-h-screen bg-gray-50")}>
         <AuthProvider>{children}</AuthProvider>
+        <Toaster position="bottom-left" />
       </body>
     </html>
   );
