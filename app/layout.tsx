@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import clsx from "clsx";
 import "./globals.css";
+import { AuthProvider } from "@/contexts/AuthContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -28,7 +29,7 @@ export default function RootLayout({
         />
       </head>
       <body className={clsx(inter.className, "w-full min-h-screen bg-gray-50")}>
-        {children}
+        <AuthProvider>{children}</AuthProvider>
       </body>
     </html>
   );
