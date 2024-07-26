@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef, useCallback } from "react";
+import { motion } from "framer-motion";
 import ProductCard from "./ProductCard";
 import { debounce } from "@/utils/debounce.utils";
 import { Spinner } from "./Spinner";
@@ -82,11 +83,12 @@ const ProductSection: React.FC = () => {
               <ProductCard
                 ref={lastProductElementRef}
                 key={product.id}
+                index={index}
                 {...product}
               />
             );
           } else {
-            return <ProductCard key={product.id} {...product} />;
+            return <ProductCard key={product.id} index={index % 8} {...product} />;
           }
         })}
       </div>

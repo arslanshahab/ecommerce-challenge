@@ -1,8 +1,9 @@
+import React, { forwardRef } from "react";
+import { motion } from "framer-motion";
 import { useCart } from "@/contexts/CartContext";
 import { validateImageSource } from "@/utils/helpers.utils";
 import Image from "next/image";
 import Link from "next/link";
-import React, { forwardRef } from "react";
 
 interface IProductCardProps {
   id: number;
@@ -10,10 +11,11 @@ interface IProductCardProps {
   description: string;
   imageURL: string;
   price: number;
+  index: number;
 }
 
 const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
-  ({ id, name, description, imageURL, price }, ref) => {
+  ({ id, name, description, imageURL, price, index }, ref) => {
     const { addItem } = useCart();
 
     const data = JSON.stringify({ description, id, imageURL, name, price });
@@ -23,9 +25,30 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
     };
 
     return (
-      <div
+      <motion.div
         ref={ref}
         className="rounded-lg border-2 border-gray-50 flex flex-col items-start justify-start md:p-3 p-2 relative"
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: { opacity: 1 },
+        }}
+        transition={{
+          duration: 0.5,
+          delay: index * 0.125,
+          ease: "easeInOut",
+        }}
+        viewport={{ amount: 0 }}
+        whileHover={{
+          scale: 1.01,
+          transition: {
+            type: "spring",
+            stiffness: 260,
+            damping: 10,
+            duration: 0.125,
+          },
+        }}
       >
         <Link
           href={`/products/${id}?item=${data}`}
@@ -70,14 +93,23 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
             {price} SAR
           </span>
         </div>
-        <button
+        <motion.button
           type="button"
           className="w-full bg-primary text-white p-2 text-md rounded-md"
           onClick={handleAddToCart}
+          whileHover={{
+            scale: 1.03,
+            transition: {
+              type: "spring",
+              stiffness: 260,
+              damping: 10,
+              duration: 0.125,
+            },
+          }}
         >
           إضافة للسلة
-        </button>
-      </div>
+        </motion.button>
+      </motion.div>
     );
   }
 );
