@@ -8,6 +8,7 @@ import InputField from "@/components/InputField";
 import { authApi } from "@/services/auth";
 import { useAuthContext } from "@/contexts/AuthContext";
 import toast from "react-hot-toast";
+import { apiService } from "@/services/api";
 
 type LoginInputs = {
   email: string;
@@ -30,6 +31,7 @@ export default function LoginForm() {
       console.log("Login successful:", response);
       if (response.status === "success" && response.token) {
         saveAuthToken(response.token);
+        apiService.setAccessToken(response.token);
         toast.success("Login successful");
         router.push("/");
       } else {

@@ -15,9 +15,9 @@ export function useAuth() {
   };
 
   useEffect(() => {
-    const _authToken = localStorage.getItem('_authToken');
-    if (_authToken) {
-      setToken(_authToken);
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setToken(authToken);
     }
   }, []);
 

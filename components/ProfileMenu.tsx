@@ -4,17 +4,19 @@ import Link from "next/link";
 import React, { useContext, useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Menu, MenuButton, MenuItem, MenuItems } from "@headlessui/react";
+import { useCart } from "@/contexts/CartContext";
 
 // import { UserContext } from '@/context/userContext'
 // import { CartContext } from '@/context/cartContext'
 
 const ProfileMenu = () => {
   const { token, removeAuthToken } = useAuthContext();
-  // const { handleCart } = useContext(CartContext)
+  const { refreshCart } = useCart();
   const router = useRouter();
 
   const handleLogout = () => {
     removeAuthToken();
+    refreshCart(true);
     router.push("/login");
   };
 

@@ -2,6 +2,7 @@ import axios, { AxiosInstance, AxiosResponse, AxiosError } from "axios";
 
 class ApiService {
   private api: AxiosInstance;
+  private accessToken: string | null = null;
 
   constructor() {
     this.api = axios.create({
@@ -22,6 +23,11 @@ class ApiService {
   private handleError(error: AxiosError) {
     console.error("API Error:", error);
     return Promise.reject(error);
+  }
+
+  public setAccessToken(token: string) {
+    this.accessToken = token;
+    this.api.defaults.params = { token };
   }
 
   public async get<T>(url: string, config = {}): Promise<T> {
