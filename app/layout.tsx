@@ -9,7 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Salla | Ecommerce",
-  description: "Demo store in NextJs",
+  description: "Salla provides you with integrated and smart digital solutions to start your ecommerce easily and safely - Start locally and grow globally. Connect your store with professional payments solutions,",
 };
 
 export default function RootLayout({
