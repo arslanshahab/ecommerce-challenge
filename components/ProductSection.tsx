@@ -70,11 +70,12 @@ const ProductSection: React.FC<IProductSectionProps> = ({
   );
 
   const filteredProducts = products.filter((product) => {
+    debugger;
     const matchesSearchQuery = product.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
     const matchesCategory =
-      selectedCategory === "all" ||
+      selectedCategory === "-1" ||
       product.categoryId.toString() === selectedCategory;
     return matchesSearchQuery && matchesCategory;
   });
@@ -96,22 +97,6 @@ const ProductSection: React.FC<IProductSectionProps> = ({
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {/* {products.map((product, index) => {
-          if (products.length === index + 1) {
-            return (
-              <ProductCard
-                ref={lastProductElementRef}
-                key={product.id}
-                index={index}
-                {...product}
-              />
-            );
-          } else {
-            return (
-              <ProductCard key={product.id} index={index % 8} {...product} />
-            );
-          }
-        })} */}
         {filteredProducts.map((product, index) => {
           if (filteredProducts.length === index + 1) {
             return (
@@ -128,6 +113,16 @@ const ProductSection: React.FC<IProductSectionProps> = ({
             );
           }
         })}
+        {filteredProducts.length === 0 && (
+          <motion.h2
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+            className="col-span-full text-center text-2xl text-gray-500"
+          >
+            لا توجد منتجات مطابقة
+          </motion.h2>
+        )}
       </div>
       {loading && (
         <div className="flex items-center justify-center w-full p-4">

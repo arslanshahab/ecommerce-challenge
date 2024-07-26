@@ -1,6 +1,5 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { apiService } from "@/services/api";
 import { categoryApi, ICategory } from "@/services/category";
 
 interface SearchFilterProps {
@@ -17,7 +16,21 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch, onFilter }) => {
     const fetchCategories = async () => {
       try {
         const data = await categoryApi.getCategories();
-        setCategories([...data]);
+        /**
+         * filter out any empty categories from the list
+         * and pick only the first 10 categories
+         * and prepend an "all" category
+         */
+        const filteredCategories = data
+          .filter(
+            (category) =>
+              category.categoryName !== "" && category.categoryName !== null
+          )
+          .slice(0, 10);
+        setCategories([
+          { id: -1, categoryName: "الكل", imageUrl: "", products: [] },
+          ...filteredCategories,
+        ]);
       } catch (error) {
         console.error("Failed to fetch categories", error);
       }
