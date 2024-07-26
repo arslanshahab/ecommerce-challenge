@@ -19,7 +19,7 @@ const Slider: React.FC<ISliderProps> = ({ images }) => {
   }, [images.length]);
 
   return (
-    <div className="relative w-full h-[400px]">
+    <div className="relative w-full h-[60vh]">
       {/* Adjust height as needed */}
       {images.map((src, index) => (
         <div

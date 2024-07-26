@@ -4,12 +4,14 @@ import { Toaster } from "react-hot-toast";
 import clsx from "clsx";
 import "./globals.css";
 import { AuthProvider } from "@/contexts/AuthContext";
+import { CartProvider } from "@/contexts/CartContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Salla | Ecommerce",
-  description: "Salla provides you with integrated and smart digital solutions to start your ecommerce easily and safely - Start locally and grow globally. Connect your store with professional payments solutions,",
+  description:
+    "Salla provides you with integrated and smart digital solutions to start your ecommerce easily and safely - Start locally and grow globally. Connect your store with professional payments solutions,",
 };
 
 export default function RootLayout({
@@ -30,7 +32,9 @@ export default function RootLayout({
         />
       </head>
       <body className={clsx(inter.className, "w-full min-h-screen bg-gray-50")}>
-        <AuthProvider>{children}</AuthProvider>
+        <AuthProvider>
+          <CartProvider>{children}</CartProvider>
+        </AuthProvider>
         <Toaster position="bottom-left" />
       </body>
     </html>
