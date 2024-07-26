@@ -23,6 +23,7 @@ const Cart: React.FC = () => {
                   key={item.id}
                   id={item.id}
                   name={item.product.name}
+                  description={item.product.description}
                   imageURL={item.product.imageURL}
                   price={item.product.price}
                   quantity={item.quantity}

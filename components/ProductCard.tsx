@@ -51,7 +51,9 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
         }}
       >
         <Link
-          href={`/products/${id}?item=${data}`}
+          // being done as we have no api to fetch product details
+          // @FIXME: need to find better approach
+          href={`/product/${id}?item=${data}`}
           className="block w-full aspect-4/3 relative mb-4"
         >
           <Image
