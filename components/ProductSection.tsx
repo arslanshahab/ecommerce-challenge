@@ -13,12 +13,21 @@ interface Product {
   description: string;
   imageURL: string;
   price: number;
+  categoryId: number;
+}
+
+interface IProductSectionProps {
+  searchQuery: string;
+  selectedCategory: string;
 }
 
 const BATCH_SIZE = 8;
 const DEBOUNCE_DELAY = 500;
 
-const ProductSection: React.FC = () => {
+const ProductSection: React.FC<IProductSectionProps> = ({
+  searchQuery,
+  selectedCategory,
+}) => {
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
@@ -60,6 +69,16 @@ const ProductSection: React.FC = () => {
     [loading, hasMore, products, allProducts]
   );
 
+  const filteredProducts = products.filter((product) => {
+    const matchesSearchQuery = product.name
+      .toLowerCase()
+      .includes(searchQuery.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "all" ||
+      product.categoryId.toString() === selectedCategory;
+    return matchesSearchQuery && matchesCategory;
+  });
+
   const lastProductElementRef = useCallback(
     (node: HTMLElement | null) => {
       if (loading) return;
@@ -77,7 +96,7 @@ const ProductSection: React.FC = () => {
   return (
     <>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4">
-        {products.map((product, index) => {
+        {/* {products.map((product, index) => {
           if (products.length === index + 1) {
             return (
               <ProductCard
@@ -88,7 +107,25 @@ const ProductSection: React.FC = () => {
               />
             );
           } else {
-            return <ProductCard key={product.id} index={index % 8} {...product} />;
+            return (
+              <ProductCard key={product.id} index={index % 8} {...product} />
+            );
+          }
+        })} */}
+        {filteredProducts.map((product, index) => {
+          if (filteredProducts.length === index + 1) {
+            return (
+              <ProductCard
+                ref={lastProductElementRef}
+                index={index}
+                key={product.id}
+                {...product}
+              />
+            );
+          } else {
+            return (
+              <ProductCard key={product.id} index={index % 8} {...product} />
+            );
           }
         })}
       </div>
