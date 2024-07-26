@@ -25,7 +25,7 @@ const ProfileMenu = () => {
       <Link
         href="/login"
         type="button"
-        className="w-[40px] h-[40px] rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary"
+        className="w-10 h-10 rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary"
       >
         <i className="sicon-user"></i>
       </Link>
@@ -36,7 +36,7 @@ const ProfileMenu = () => {
     // @FIXME: move dropdown to a separte file
     <Menu as="div" className="relative inline-block text-left">
       <div>
-        <MenuButton className="w-[40px] h-[40px] rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary">
+        <MenuButton className="w-10 h-10 rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary">
           <i className="sicon-user"></i>
         </MenuButton>
       </div>

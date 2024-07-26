@@ -1,4 +1,4 @@
-import { apiService } from './api';
+import { apiService } from "./api";
 
 export interface Product {
   id: number;
@@ -20,15 +20,28 @@ export interface Cart {
 }
 
 export const cartApi = {
-  getCart: (token: string) => 
-    apiService.get<Cart>('/cart/', { params: { token } }),
-  
+  getCart: (token: string) =>
+    apiService.get<Cart>("/cart/", { params: { token } }),
+
   addToCart: (token: string, productId: number, quantity: number) =>
-    apiService.post('/cart/add', { productId, quantity }, { params: { token } }),
-  
+    apiService.post(
+      "/cart/add",
+      { productId, quantity },
+      { params: { token } }
+    ),
+
   removeFromCart: (token: string, cartItemId: number) =>
     apiService.delete(`/cart/delete/${cartItemId}`, { params: { token } }),
-  
-  updateCartItem: (token: string, cartItemId: number, quantity: number) =>
-    apiService.put(`/cart/update/${cartItemId}`, { quantity }, { params: { token } }),
+
+  updateCartItem: (
+    token: string,
+    id: number,
+    productId: number,
+    quantity: number
+  ) =>
+    apiService.put(
+      `/cart/update/${id}`,
+      { id, productId, quantity },
+      { params: { token } }
+    ),
 };

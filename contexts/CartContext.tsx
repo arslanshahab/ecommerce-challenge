@@ -10,8 +10,11 @@ interface CartContextType {
   error: string | null;
   addItem: (productId: number, quantity: number) => Promise<void>;
   removeItem: (cartItemId: number) => Promise<void>;
-  updateQuantity: (cartItemId: number, quantity: number) => Promise<void>;
+  updateQuantity: (cartItemId: number, productId: number, quantity: number) => Promise<void>;
   refreshCart: (setToEmpty?: boolean) => Promise<void>;
+  incrementQuantity: (cartItemId: number, productId: number) => Promise<void>;
+  decrementQuantity: (cartItemId: number, productId: number) => Promise<void>;
+  getTotalCost: () => number | undefined;
 }
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
@@ -78,11 +81,15 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     }
   };
 
-  const updateQuantity = async (cartItemId: number, quantity: number) => {
+  const updateQuantity = async (
+    cartItemId: number,
+    productId: number,
+    quantity: number
+  ) => {
     if (!token) return;
     setLoading(true);
     try {
-      await cartApi.updateCartItem(token, cartItemId, quantity);
+      await cartApi.updateCartItem(token, cartItemId, productId, quantity);
       await refreshCart();
     } catch (err) {
       setError("Failed to update item quantity");
@@ -90,6 +97,33 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     } finally {
       setLoading(false);
     }
+  };
+
+  const incrementQuantity = async (cartItemId: number, productId: number) => {
+    if (!token) return;
+    const item = cart?.cartItems.find((item) => item.id === cartItemId);
+    if (!item) return;
+    const newQuantity = item.quantity + 1;
+    await updateQuantity(cartItemId, productId, newQuantity);
+  };
+
+  const decrementQuantity = async (cartItemId: number, productId: number) => {
+    if (!token) return;
+    const item = cart?.cartItems.find((item) => item.id === cartItemId);
+    if (!item) return;
+    const newQuantity = item.quantity - 1;
+    if (newQuantity <= 0) {
+      await removeItem(cartItemId);
+    } else {
+      await updateQuantity(cartItemId, productId, newQuantity);
+    }
+  };
+
+  const getTotalCost = () => {
+    return cart?.cartItems?.reduce(
+      (total, item) => total + item.product.price * item.quantity,
+      0
+    );
   };
 
   return (
@@ -102,6 +136,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         removeItem,
         updateQuantity,
         refreshCart,
+        incrementQuantity,
+        decrementQuantity,
+        getTotalCost,
       }}
     >
       {children}

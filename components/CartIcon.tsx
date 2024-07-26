@@ -13,7 +13,7 @@ const CartIcon = () => {
       <Link
         href="/cart"
         type="button"
-        className="w-[40px] h-[40px] rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary"
+        className="w-10 h-10 rounded-full text-center flex items-center justify-center bg-secondary-50 text-primary"
       >
         <i className="sicon-shopping-bag"></i>
       </Link>

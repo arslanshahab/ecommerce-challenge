@@ -19,7 +19,7 @@ export default function AuthLayout({ children }: IAuthLayoutProps) {
                 <div className="flex flex-col items-center gap-4 relative">
                   <Link
                     href="/"
-                    className="block w-[80px] h-[80px] bg-gray-50 p-2 rounded-full border-4 border-secondary-50"
+                    className="block w-20 h-20 bg-gray-50 p-2 rounded-full border-4 border-secondary-50"
                   >
                     <Image
                       src="https://cdn.salla.network/images/logo/logo-square.png"

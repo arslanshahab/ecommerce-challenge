@@ -29,7 +29,7 @@ export default function RootLayout({
           href="https://cdn.salla.network/fonts/sallaicons.css"
         />
       </head>
-      <body className={clsx(inter.className, "w-full min-h-screen bg-gray-50")}>
+      <body className={clsx(inter.className, "w-full min-h-screen flex flex-col bg-gray-50")}>
         {children}
         <Toaster position="bottom-left" />
       </body>
