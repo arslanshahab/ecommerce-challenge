@@ -3,7 +3,7 @@
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import InputField from "@/components/InputField";
 import { authApi } from "@/services/auth";
 import { useAuthContext } from "@/contexts/AuthContext";
@@ -21,7 +21,7 @@ export default function LoginForm() {
     formState: { errors },
     setError,
   } = useForm<LoginInputs>();
-  // const router = useRouter();
+  const router = useRouter();
   const { saveAuthToken } = useAuthContext();
 
   const onSubmit: SubmitHandler<LoginInputs> = async (data) => {
@@ -30,7 +30,8 @@ export default function LoginForm() {
       console.log("Login successful:", response);
       if (response.status === "success" && response.token) {
         saveAuthToken(response.token);
-        toast.success("Login successful")
+        toast.success("Login successful");
+        router.push("/");
       } else {
         throw new Error("Login failed");
       }

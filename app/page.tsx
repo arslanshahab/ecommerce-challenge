@@ -1,3 +1,4 @@
+import Navbar from "@/components/Navbar";
 import Slider from "@/components/Slider";
 
 const images = [
@@ -8,12 +9,15 @@ const images = [
 
 export default function Home() {
   return (
-    <main className="w-full main flex-auto flex justify-center">
-      <div className="container">
-        <div className="p-2 sm:p-4 bg-white rounded-lg shadow-4xl">
-          <Slider images={images} />
+    <>
+      <Navbar />
+      <main className="w-full main flex-auto flex justify-center">
+        <div className="container">
+          <div className="p-2 sm:p-4 bg-white rounded-lg shadow-4xl">
+            <Slider images={images} />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
