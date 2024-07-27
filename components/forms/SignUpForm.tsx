@@ -23,7 +23,10 @@ export default function SignUpForm() {
     formState: { errors },
     setError,
     watch,
-  } = useForm<SignUpInputs>();
+    trigger,
+  } = useForm<SignUpInputs>({
+    mode: "onBlur",
+  });
   const router = useRouter();
 
   const onSubmit: SubmitHandler<SignUpInputs> = async (data) => {
@@ -70,6 +73,7 @@ export default function SignUpForm() {
             message: "الرجاء إدخال بريد إلكتروني صحيح",
           },
         })}
+          onBlur={() => trigger("email")}
       />
       <InputField
         label="الاسم الأول"
@@ -81,6 +85,7 @@ export default function SignUpForm() {
             message: "الاسم الأول يجب أن يكون حرفين على الأقل",
           },
         })}
+          onBlur={() => trigger("firstName")}
       />
       <InputField
         label="اسم العائلة"
@@ -92,6 +97,7 @@ export default function SignUpForm() {
             message: "اسم العائلة يجب أن يكون حرفين على الأقل",
           },
         })}
+          onBlur={() => trigger("lastName")}
       />
       <InputField
         label="كلمة المرور"
@@ -104,6 +110,7 @@ export default function SignUpForm() {
             message: "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
           },
         })}
+          onBlur={() => trigger("password")}
       />
       <InputField
         label="تأكيد كلمة المرور"
@@ -117,6 +124,7 @@ export default function SignUpForm() {
             }
           },
         })}
+          onBlur={() => trigger("confirmPassword")}
       />
       {errors.root && (
         <p className="text-red-500 text-sm mb-4">{errors.root.message}</p>

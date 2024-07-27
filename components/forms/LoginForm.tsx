@@ -21,7 +21,10 @@ export default function LoginForm() {
     handleSubmit,
     formState: { errors },
     setError,
-  } = useForm<LoginInputs>();
+    trigger,
+  } = useForm<LoginInputs>({
+    mode: "onBlur",
+  });
   const router = useRouter();
   const { saveAuthToken } = useAuthContext();
 
@@ -58,6 +61,7 @@ export default function LoginForm() {
             message: "الرجاء إدخال بريد إلكتروني صحيح",
           },
         })}
+        onBlur={() => trigger("email")}
       />
       <InputField
         label="كلمة المرور"
@@ -70,6 +74,7 @@ export default function LoginForm() {
             message: "كلمة المرور يجب أن تكون 6 أحرف على الأقل",
           },
         })}
+        onBlur={() => trigger("password")}
       />
       {errors.root && (
         <p className="text-red-500 text-sm mb-4">{errors.root.message}</p>

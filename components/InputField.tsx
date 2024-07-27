@@ -9,10 +9,11 @@ const InputField = forwardRef<HTMLInputElement, IInputFieldProps>(
   ({ label, error, ...rest }, ref) => {
     return (
       <div className="mb-4">
-        <label htmlFor={rest.name} className="block mb-2 text-md">
+        <label htmlFor={`${rest.name}_${rest.prefix}`} className="block mb-2 text-md">
           {label}
         </label>
         <input
+          id={`${rest.name}_${rest.prefix}`}
           ref={ref}
           className={`w-full p-2 bg-white appearance-none rounded-md border text-md ${
             error ? 'border-red-500' : 'border-gray-300'
