@@ -6,8 +6,7 @@ class ApiService {
 
   constructor() {
     this.api = axios.create({
-      // @FIXME: move the base url to .env
-      baseURL: "https://limitless-lake-55070.herokuapp.com",
+      baseURL: process.env.NEXT_PUBLIC_API_URL,
       headers: {
         "Content-Type": "application/json",
       },

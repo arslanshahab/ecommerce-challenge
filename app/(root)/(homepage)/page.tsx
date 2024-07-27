@@ -12,7 +12,7 @@ const images = [
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("-1");
 
   const handleSearch = (query: string) => {
     setSearchQuery(query);

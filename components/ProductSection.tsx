@@ -37,7 +37,11 @@ const ProductSection: React.FC<IProductSectionProps> = ({
   const fetchAllProducts = useCallback(async () => {
     setLoading(true);
     try {
+      console.log("Fetching products");
+      
       const fetchedProducts = await getProducts();
+      console.log("Fetched products", fetchedProducts);
+      
       setAllProducts(fetchedProducts);
       setProducts(fetchedProducts.slice(0, BATCH_SIZE));
       setHasMore(fetchedProducts.length > BATCH_SIZE);
@@ -70,7 +74,6 @@ const ProductSection: React.FC<IProductSectionProps> = ({
   );
 
   const filteredProducts = products.filter((product) => {
-    debugger;
     const matchesSearchQuery = product.name
       .toLowerCase()
       .includes(searchQuery.toLowerCase());
