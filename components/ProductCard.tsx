@@ -92,7 +92,7 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
         <div className="flex flex-col sm:flex-row items-center justify-center w-full mb-4 gap-0 sm:gap-2">
           <span className="font-medium text-md">{price} SAR</span>
           <span className="font-medium text-sm line-through text-gray-300">
-            {price} SAR
+            {price * 0.9} SAR
           </span>
         </div>
         <motion.button

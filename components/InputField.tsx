@@ -18,6 +18,7 @@ const InputField = forwardRef<HTMLInputElement, IInputFieldProps>(
             error ? 'border-red-500' : 'border-gray-300'
           }`}
           {...rest}
+          placeholder={label}
         />
         {error && <p className="mt-1 text-xs text-red-500">{error}</p>}
       </div>

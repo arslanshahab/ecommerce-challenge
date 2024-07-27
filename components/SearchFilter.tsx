@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from "react";
 import { categoryApi, ICategory } from "@/services/category";
 
-interface SearchFilterProps {
+interface ISearchFilterProps {
   onSearch: (query: string) => void;
   onFilter: (category: string) => void;
 }
 
-const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch, onFilter }) => {
+const SearchFilter: React.FC<ISearchFilterProps> = ({ onSearch, onFilter }) => {
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("all");
+  const [selectedCategory, setSelectedCategory] = useState("-1");
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -79,7 +79,7 @@ const SearchFilter: React.FC<SearchFilterProps> = ({ onSearch, onFilter }) => {
           onChange={handleCategoryChange}
         >
           {categories.map((category) => (
-            <option key={category.id} value={category.id}>
+            <option key={category.id} value={category.id.toString()}>
               {category.categoryName}
             </option>
           ))}
