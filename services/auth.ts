@@ -1,16 +1,5 @@
+import { ISignInDto, ISignUpDto } from '@/types/auth.types';
 import { apiService } from './api';
-
-interface ISignInDto {
-  email: string;
-  password: string;
-}
-
-interface ISignUpDto {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-}
 
 export const authApi = {
   signIn: (signInDto: ISignInDto) => 

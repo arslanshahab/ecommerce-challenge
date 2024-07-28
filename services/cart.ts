@@ -1,27 +1,10 @@
+import { ICart } from "@/types/cart.types";
 import { apiService } from "./api";
 
-export interface Product {
-  id: number;
-  name: string;
-  description: string;
-  imageURL: string;
-  price: number;
-}
-
-export interface CartItem {
-  id: number;
-  product: Product;
-  quantity: number;
-}
-
-export interface Cart {
-  cartItems: CartItem[];
-  totalCost: number;
-}
 
 export const cartApi = {
   getCart: (token: string) =>
-    apiService.get<Cart>("/cart/", { params: { token } }),
+    apiService.get<ICart>("/cart/", { params: { token } }),
 
   addToCart: (token: string, productId: number, quantity: number) =>
     apiService.post(

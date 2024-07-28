@@ -2,20 +2,10 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { ICartItemProps } from "@/types/cart.types";
 
-interface CartItemProps {
-  id: number;
-  name: string;
-  imageURL: string;
-  price: number;
-  quantity: number;
-  description: string;
-  increment: () => void;
-  decrement: () => void;
-  remove: () => void;
-}
 
-const CartItem: React.FC<CartItemProps> = ({
+const CartItem: React.FC<ICartItemProps> = ({
   id,
   name,
   imageURL,

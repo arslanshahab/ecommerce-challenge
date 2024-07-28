@@ -18,11 +18,13 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
   ({ id, name, description, imageURL, price, index }, ref) => {
     const { addItem } = useCart();
 
-    const data = JSON.stringify({ description, id, imageURL, name, price });
-
     const handleAddToCart = () => {
       addItem(id, 1);
     };
+
+    const data = JSON.stringify({ description, id, imageURL, name, price });
+    const truncatedDescription =
+      description.length > 50 ? `${description.slice(0, 50)}...` : description;
 
     return (
       <motion.div
@@ -74,10 +76,8 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
                 {name.length > 30 ? `${name.slice(0, 30)}...` : name}
               </h2>
             </a>
-            <small className="block text-xs w-full text-center">
-              {description.length > 50
-                ? `${description.slice(0, 50)}...`
-                : description}
+            <small className="block text-xs w-full text-center break-words">
+              {truncatedDescription}
             </small>
           </div>
           <div className="flex items-center justify-center flex-wrap gap-2 text-gray-300 w-full">
@@ -92,7 +92,7 @@ const ProductCard = forwardRef<HTMLDivElement, IProductCardProps>(
         <div className="flex flex-col sm:flex-row items-center justify-center w-full mb-4 gap-0 sm:gap-2">
           <span className="font-medium text-md">{price} SAR</span>
           <span className="font-medium text-sm line-through text-gray-300">
-            {price * 0.9} SAR
+            {(price * 0.9).toFixed(2)} SAR
           </span>
         </div>
         <motion.button

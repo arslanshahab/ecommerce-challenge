@@ -2,12 +2,8 @@
 
 import React, { createContext, useContext, ReactNode } from 'react';
 import { useAuth } from '@/hooks/useAuth';
+import { IAuthContextType } from '@/types/auth.types';
 
-interface IAuthContextType {
-  token: string | null;
-  saveAuthToken: (token: string) => void;
-  removeAuthToken: () => void;
-}
 
 const AuthContext = createContext<IAuthContextType | undefined>(undefined);
 

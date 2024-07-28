@@ -1,28 +1,16 @@
 "use client";
 import React, { createContext, useContext, useState, useEffect } from "react";
 import { useAuthContext } from "./AuthContext";
-import { cartApi, Cart, CartItem } from "@/services/cart";
+import { cartApi } from "@/services/cart";
 import toast from "react-hot-toast";
+import { ICart, ICartContextType } from "@/types/cart.types";
 
-interface CartContextType {
-  cart: Cart | null;
-  loading: boolean;
-  error: string | null;
-  addItem: (productId: number, quantity: number) => Promise<void>;
-  removeItem: (cartItemId: number) => Promise<void>;
-  updateQuantity: (cartItemId: number, productId: number, quantity: number) => Promise<void>;
-  refreshCart: (setToEmpty?: boolean) => Promise<void>;
-  incrementQuantity: (cartItemId: number, productId: number) => Promise<void>;
-  decrementQuantity: (cartItemId: number, productId: number) => Promise<void>;
-  getTotalCost: () => number | undefined;
-}
-
-const CartContext = createContext<CartContextType | undefined>(undefined);
+const CartContext = createContext<ICartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [cart, setCart] = useState<Cart | null>(null);
+  const [cart, setCart] = useState<ICart | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { token } = useAuthContext();

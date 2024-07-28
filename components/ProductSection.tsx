@@ -6,15 +6,8 @@ import ProductCard from "./ProductCard";
 import { debounce } from "@/utils/debounce.utils";
 import { Spinner } from "./Spinner";
 import { getProducts } from "@/services/actions";
+import { IProduct } from "@/types/product.types";
 
-interface Product {
-  id: number;
-  name: string;
-  description: string;
-  imageURL: string;
-  price: number;
-  categoryId: number;
-}
 
 interface IProductSectionProps {
   searchQuery: string;
@@ -28,8 +21,8 @@ const ProductSection: React.FC<IProductSectionProps> = ({
   searchQuery,
   selectedCategory,
 }) => {
-  const [allProducts, setAllProducts] = useState<Product[]>([]);
-  const [products, setProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<IProduct[]>([]);
   const [loading, setLoading] = useState(false);
   const [hasMore, setHasMore] = useState(true);
   const observer = useRef<IntersectionObserver | null>(null);
