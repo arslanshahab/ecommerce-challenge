@@ -1,12 +1,5 @@
 import { apiService } from "./api";
-import { IProduct } from "./product";
-
-export interface ICategory {
-  categoryName: string;
-  id: number;
-  imageUrl: string;
-  products: IProduct[];
-}
+import { ICategory } from "@/types/category.types";
 
 export const categoryApi = {
   getCategories: () =>

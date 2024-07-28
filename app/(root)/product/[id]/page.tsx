@@ -3,9 +3,9 @@ import React, { useContext } from "react";
 import CartItem from "@/components/CartItem";
 import { useCart } from "@/contexts/CartContext"; // Ensure CartContext is correctly defined
 import { motion, AnimatePresence } from "framer-motion";
-import { Product } from "@/services/cart";
 import Image from "next/image";
 import { validateImageSource } from "@/utils/helpers.utils";
+import { IProduct } from "@/types/product.types";
 
 const ProductDetail = ({
   searchParams,
@@ -16,7 +16,7 @@ const ProductDetail = ({
   const [quantity, setQuantity] = React.useState(1);
 
   const { item } = searchParams;
-  const product: Product = JSON.parse(item as string);
+  const product: IProduct = JSON.parse(item as string);
 
   const handleAddToCart = () => {
     addItem(product.id, quantity);

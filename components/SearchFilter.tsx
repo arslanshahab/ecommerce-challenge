@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { categoryApi, ICategory } from "@/services/category";
+import { categoryApi } from "@/services/category";
+import { ICategory } from "@/types/category.types";
 
 interface ISearchFilterProps {
   onSearch: (query: string) => void;
